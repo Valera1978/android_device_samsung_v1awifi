@@ -2,7 +2,7 @@
 <!--
 /*
 **
-** Copyright 2010, The Android Open Source Project
+** Copyright 2008, The Android Open Source Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@
 */
 -->
 
-<!-- Configuration values for Large Tablet Portrait. -->
 <resources>
-    <!-- Preferable keyboard height in absolute scale: 48.0mm -->
-    <!-- This config_default_keyboard_height value should match with keyboard-heights.xml -->
-    <dimen name="config_default_keyboard_height">200.0dp</dimen>
+    <!-- Preferable keyboard height in absolute scale: 1.285in -->
+    <!-- This keyboardHeight value should match with keyboard-heights.xml -->
+    <dimen name="keyboardHeight">200.0dp</dimen>
+    <fraction name="maxKeyboardHeight">33%p</fraction>
 
 </resources>
