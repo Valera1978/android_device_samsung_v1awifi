@@ -44,19 +44,20 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
 # Bootloader
 TARGET_OTA_ASSERT_DEVICE := v1awifi
-¹BLOCK_BASED_OTA := false
 
 # Camera
 # COMMON_GLOBAL_CFLAGS += -DUSE_MEMORY_HEAP_ION
 BOARD_NEEDS_MEMORYHEAPION := true
 COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
-COMMON_GLOBAL_CFLAGS += -DSAMSUNG_DVFS
+COMMON_GLOBAL_CFLAGS += -DEXYNOS4X12_ENHANCEMENTS
+#COMMON_GLOBAL_CFLAGS += -DSAMSUNG_DVFS
 
 # Kernel
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_CONFIG := cyanogenmod_v1awifi_defconfig
+#TARGET_KERNEL_CONFIG := omni_v1awifi_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420
 
 # Battery
@@ -169,6 +170,26 @@ BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA          := "/system/etc/wifi/bcmdhd_sta.bin"
+
+# TWRP specific build flags
+DEVICE_RESOLUTION := 1200x1920
+RECOVERY_SDCARD_ON_DATA := true
+BOARD_HAS_NO_REAL_SDCARD := true
+#RECOVERY_GRAPHICS_USE_LINELENGTH := true
+#TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
+TW_BRIGHTNESS_PATH := /sys/devices/platform/i2c-gpio.24/i2c-24/24-002c/backlight/panel/brightness
+TW_MAX_BRIGHTNESS := 255
+TW_NO_REBOOT_BOOTLOADER := true
+TW_HAS_DOWNLOAD_MODE := true
+#TW_INCLUDE_CRYPTO := true
+#TW_INCLUDE_CRYPTO_SAMSUNG := true
+TW_CRYPTO_FS_TYPE := "ext4"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/mmcblk0p29"
+TW_CRYPTO_MNT_POINT := "/data"
+TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,noatime,noauto_da_alloc,discard,journal_async_commit,errors=panic"
+TW_CRYPTO_FS_FLAGS := "0x00000406"
+TW_CRYPTO_KEY_LOC := "footer"
+#BOARD_CUSTOM_BOOTIMG_MK := device/samsung/v1awifi/custombootimg.mk
 
 # inherit from the proprietary version
 -include vendor/samsung/v1awifi/BoardConfigVendor.mk

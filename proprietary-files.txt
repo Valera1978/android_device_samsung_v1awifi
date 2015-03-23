@@ -6,9 +6,9 @@ vendor/firmware/srp_vliw.bin
 # Bluetooth
 vendor/firmware/bcm4335.hcd
 vendor/firmware/bcm4335_A0.hcd
-vendor/firmware/bcm4350.hcd
-vendor/firmware/bcm4350_A0.hcd
-vendor/firmware/BT_FW_VER_BCM4354_003.001.012.0184.0260_V1_3G_ORC.hcd
+vendor/firmware/bcm4335_murata.hcd
+vendor/firmware/bcm4335_semco.hcd
+vendor/firmware/BT_FW_VER_BCM4339_003.001.009.0031.0136_ORC_N1-3G.hcd
 
 # Camera
 lib/hw/camera.vendor.universal5420.so
@@ -36,6 +36,7 @@ vendor/lib/libwvm.so
 vendor/lib/libWVphoneAPI.so
 vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/drm/libdrmwvmplugin.so
+vendor/lib/mediadrm/libdrmclearkeyplugin.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
 lib/omx/libOMX.Exynos.AVC.Decoder.so
@@ -121,58 +122,13 @@ lib/hw/sensors.universal5420.so
 
 # Wifi
 etc/wifi/bcmdhd_apsta.bin
-etc/wifi/bcmdhd_ibss.bin
 etc/wifi/bcmdhd_mfg.bin
 etc/wifi/bcmdhd_sta.bin
-etc/wifi/bcmdhd_sta_tput.bin
-etc/wifi/bcmdhd_apsta.bin_4339_a0
-etc/wifi/bcmdhd_ibss.bin_4339_a0
-etc/wifi/bcmdhd_mfg.bin_4339_a0
-etc/wifi/bcmdhd_sta.bin_4339_a0
-etc/wifi/bcmdhd_apsta.bin_4354_a0
-etc/wifi/bcmdhd_ibss.bin_4354_a0
-etc/wifi/bcmdhd_mfg.bin_4354_a0
-etc/wifi/bcmdhd_sta.bin_4354_a0
-etc/wifi/bcmdhd_apsta.bin_4354_a1
-etc/wifi/bcmdhd_ibss.bin_4354_a1
-etc/wifi/bcmdhd_mfg.bin_4354_a1
-etc/wifi/bcmdhd_sta.bin_4354_a1
-etc/wifi/bcmdhd_apsta.bin_a0
-etc/wifi/bcmdhd_ibss.bin_a0
-etc/wifi/bcmdhd_mfg.bin_a0
-etc/wifi/bcmdhd_sta.bin_a0
-etc/wifi/bcmdhd_sta_tput.bin_a0
+etc/wifi/bcmdhd_ibss.bin
 etc/wifi/cred.conf
-etc/wifi/olsrd.conf
-etc/wifi/nvram_mfg.txt_4339_a0
-etc/wifi/nvram_net.txt_4339_a0
-etc/wifi/nvram_mfg.txt_4354_a0
-etc/wifi/nvram_net.txt_4354_a0
-etc/wifi/nvram_mfg.txt_4354_a1
-etc/wifi/nvram_net.txt_4354_a1
+etc/wifi/nvram_mfg.txt
+etc/wifi/nvram_net.txt
 
 # Input
 usr/idc/Synaptics_HID_TouchPad.idc
 usr/keylayout/gpio-keys.kl
-
-# S-Pen
-usr/idc/sec_e-pen.idc
-lib/libSPenBase.so
-lib/libSPenBeautify.so
-lib/libSPenBrush.so
-lib/libSPenChineseBrush.so
-lib/libSPenEngine.so
-lib/libSPenHSV.so
-lib/libSPenImageFilterLibs.so
-lib/libSPenInit.so
-lib/libSPenInkPen.so
-lib/libSPenMagicPen.so
-lib/libSPenMarker.so
-lib/libSPenModel.so
-lib/libSPenNativePen.so
-lib/libSPenPencil.so
-lib/libSPenPluginFW.so
-lib/libSPenScreenCodecDecoder.so
-lib/libSPenSkia.so
-lib/libSPenVIRecognition.so
-lib/libSPenVITextAll.so

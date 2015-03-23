@@ -9,9 +9,7 @@ import /init.usb.rc
 import /init.${ro.hardware}.rc
 import /init.${ro.zygote}.rc
 import /init.trace.rc
-# Include CM's extra init file
-import /init.cm.rc
-
+import /init.omni.rc
 
 on early-init
     # Set init and its forked children's oom_adj.
@@ -260,7 +258,6 @@ on post-fs-data
     # create basic filesystem structure
     mkdir /data/misc 01771 system misc
     mkdir /data/misc/adb 02750 system shell
-    mkdir /data/misc/audit 02750 audit system
     mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
     mkdir /data/misc/bluetooth 0770 system system
     mkdir /data/misc/keystore 0700 keystore keystore
@@ -501,10 +498,6 @@ service console /system/bin/sh
     group shell log
     seclabel u:r:shell:s0
 
-service auditd /system/bin/auditd -k
-    seclabel u:r:logd:s0
-    class main
-
 on property:ro.debuggable=1
     start console
 
@@ -558,7 +551,7 @@ service ril-daemon /system/bin/rild
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_rw qcom_diag log
+    group radio cache inet misc audio log qcom_diag
 
 service surfaceflinger /system/bin/surfaceflinger
     class core
@@ -566,22 +559,15 @@ service surfaceflinger /system/bin/surfaceflinger
     group graphics drmrpc
     onrestart restart zygote
 
-service drm /system/bin/drmserver.samsung
+service drm /system/bin/drmserver
     class main
     user drm
-# Samsung changed: [ SEC_MM_DRM
-# fix
-    group system drm inet drmrpc sdcard_r sdcard_rw media_rw radio shell
-# org
-#    group drm system inet drmrpc
-# ]
+    group drm system inet drmrpc
 
 service media /system/bin/mediaserver
     class main
     user media
-    # Samsung changed:
-    # group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm qcom_diag
-    group system audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm sdcard_rw sdcard_r media_rw shell lgt_gid qcom_diag
+    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm
     ioprio rt 4
 
 # One shot invocation to deal with encrypted volume.
@@ -600,7 +586,7 @@ service encrypt /system/bin/vdc --wait cryptfs enablecrypto inplace default
 
 service bootanim /system/bin/bootanimation
     class core
-    user media
+    user graphics
     group graphics audio
     disabled
     oneshot
@@ -609,15 +595,10 @@ service installd /system/bin/installd
     class main
     socket installd stream 600 system system
 
-service flash_recovery /system/etc/install-cm-recovery.sh
-    class main
-    seclabel u:r:install_recovery:s0
-    oneshot
-    disabled
-
-# update recovery if enabled
-on property:persist.sys.recovery_update=true
-    start flash_recovery
+#service flash_recovery /system/bin/install-recovery.sh
+#    class main
+#    seclabel u:r:install_recovery:s0
+#    oneshot
 
 service racoon /system/bin/racoon
     class main

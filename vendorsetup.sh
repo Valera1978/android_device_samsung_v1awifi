@@ -1,1 +1,1 @@
-add_lunch_combo cm_v1awifi-userdebug
+add_lunch_combo omni_v1awifi-userdebug
