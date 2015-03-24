@@ -24,7 +24,7 @@ cd omni5
 
   - Do repo init & sync
 
-repo init -u git://github.com/omnirom/android.git -b android-5.0
+repo init -u git://github.com/omnirom/android.git -b android-5.1
 
   - Create .repo/local_manifests/roomservice.xml with the following content:
 
