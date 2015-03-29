@@ -24,7 +24,7 @@ cd omni5
 
   - Do repo init & sync
 
-repo init -u git://github.com/omnirom/android.git -b android-5.1
+repo init -u git://github.com/omnirom/android.git -b android-5.0
 
   - Create .repo/local_manifests/roomservice.xml with the following content:
 
@@ -34,6 +34,7 @@ repo init -u git://github.com/omnirom/android.git -b android-5.1
   <project name="Valera1978/android_kernel_samsung_v1awifi" path="kernel/samsung" remote="github" revision="cm12" />
   <project name="Valera1978/android_vendor_samsung_v1awifi" path="vendor/samsung/v1awifi" remote="github" revision="cm12" />
   <project name="CyanogenMod/android_kernel_samsung_exynos5420" path="kernel/samsung/exynos5420" remote="github" />
+  <project name="CyanogenMod/android_hardware_samsung" path="hardware/samsung" remote="github" revision="cm-12.0" />
   <project name="CyanogenMod/android_hardware_samsung_slsi_exynos" path="hardware/samsung_slsi/exynos" remote="github" revision="cm-12.0" />
   <project name="CyanogenMod/android_hardware_samsung_slsi_exynos5-insignal" path="hardware/samsung_slsi/exynos5-insignal" remote="github" revision="cm-12.0" />
   <project name="CyanogenMod/android_hardware_samsung_slsi_exynos5420" path="hardware/samsung_slsi/exynos5420" remote="github" revision="cm-12.0" />
