@@ -50,8 +50,8 @@ static struct hw_module_methods_t camera_module_methods = {
 camera_module_t HAL_MODULE_INFO_SYM = {
     common: {
          tag: HARDWARE_MODULE_TAG,
-         module_api_version: CAMERA_MODULE_API_VERSION_2_1,
-         hal_api_version:    HARDWARE_HAL_API_VERSION,
+         version_major: 1,
+         version_minor: 0,
          id: CAMERA_HARDWARE_MODULE_ID,
          name: "Exynos5420 Camera Wrapper",
          author: "The CyanogenMod Project",
