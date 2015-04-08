@@ -170,5 +170,22 @@ BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA          := "/system/etc/wifi/bcmdhd_sta.bin"
 
+# BlissPop Configs
+TARGET_TC_ROM := 4.8-sm
+TARGET_TC_KERNEL := 4.8-sm
+#BLISSIFY := true
+#BLISS_O3 := true
+#BLISS_STRICT := true
+#BLISS_GRAPHITE := true
+#BLISS_KRAIT := false
+#BLISS_PIPE := true
+TARGET_GCC_VERSION_EXP := $(TARGET_TC_ROM)
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := $(TARGET_TC_KERNEL)
+
+BLISS_BUILD_BLOCK := 0
+
+#SaberMod
+# -include vendor/bliss/config/sm.mk
+
 # inherit from the proprietary version
 -include vendor/samsung/v1awifi/BoardConfigVendor.mk
