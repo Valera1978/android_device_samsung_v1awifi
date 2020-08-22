@@ -1,2 +1,1 @@
-SM-P900 device repo for CyangenMod.
-
+SM-P900 device repo for CyanogenMod.

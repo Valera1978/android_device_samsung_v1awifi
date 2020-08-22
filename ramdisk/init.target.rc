@@ -1,0 +1,60 @@
+on boot
+    stop ril-daemon
+
+# Bluetooth Audio (AVRCP)
+    chown system system /sys/class/input/input12/enabled
+    chmod 0660 /sys/class/input/input12/enabled
+
+# Bluetooth Keyboard
+    chown system radio /sys/class/input/input11/enabled
+    chmod 0660 /sys/class/input/input11/enabled
+
+# Headphones (Headset)
+    chown system system /sys/class/input/input10/enabled
+    chmod 0660 /sys/class/input/input10/enabled
+
+# S-Pen (sec_e-pen)
+    chown system system /sys/class/input/input9/enabled
+    chmod 0660 /sys/class/input/input9/enabled
+
+# Physical Home Button (gpio-keys)
+    chown system system /sys/class/input/input8/enabled
+    chmod 0660 /sys/class/input/input8/enabled
+
+# Light Sensor
+    chown system system /sys/class/input/input7/enabled
+    chmod 0660 /sys/class/input/input7/enabled
+
+# Magnetic Sensor
+    chown system system /sys/class/input/input6/enabled
+    chmod 0660 /sys/class/input/input6/enabled
+
+# Gyro Sensor
+    chown system system /sys/class/input/input5/enabled
+    chmod 0660 /sys/class/input/input5/enabled
+
+# Accelerometer sensor
+    chown system system /sys/class/input/input4/enabled
+    chmod 0660 /sys/class/input/input4/enabled
+
+# MHL (sii8240_rcp)
+    chown system system /sys/class/input/input3/enabled
+    chmod 0660 /sys/class/input/input3/enabled
+
+# Touchscreen (sec_touchscreen)
+    chown system system /sys/class/input/input2/enabled
+    chmod 0660 /sys/class/input/input2/enabled
+
+# Micro-USB IC (max77803-muic)
+    chown system system /sys/class/input/input0/enabled
+    chmod 0660 /sys/class/input/input0/enabled
+
+# Wolfson DAC Settings
+    write /sys/class/misc/wolfson_control/switch_eq_speaker  1 # Toggle EQ
+    write /sys/class/misc/wolfson_control/speaker_gain_left 5 # Set Left Speaker Gain
+    write /sys/class/misc/wolfson_control/speaker_gain_right 5 # Set Right Speaker Gain
+    write /sys/class/misc/wolfson_control/eq_sp_gain_1 4 # Low Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_2 4 # Low-Mid Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_3 4 # Mid Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_4 5 # Mid-High Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_5 4 # High Band
