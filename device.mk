@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +15,13 @@
 # limitations under the License.
 #
 
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+
 LOCAL_PATH := device/samsung/v1awifi
 
-PRODUCT_CHARACTERISTICS := tablet
 DEVICE_PACKAGE_OVERLAYS += device/samsung/v1awifi/overlay
+
+PRODUCT_CHARACTERISTICS := tablet
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal
@@ -42,6 +46,11 @@ PRODUCT_PACKAGES += \
     fstab.universal5420 \
     init.target.rc \
     ueventd.universal5420.rc
+
+# first_stage_mount
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/ramdisk/fstab_fst.universal5420:$(TARGET_COPY_OUT_RAMDISK)/fstab.universal5420 \
+    $(LOCAL_PATH)/ramdisk/fstab_fst.universal5420:$(TARGET_COPY_OUT_VENDOR)/fstab.universal5420
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -70,10 +79,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.2-service \
+    android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.mapper@2.0-impl-2.1 \
     android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service \
     android.hardware.renderscript@1.0-impl \
     gralloc.exynos5 \
     libhwc2on1adapter \
@@ -104,42 +112,35 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
 
+# Cas
+PRODUCT_PACKAGES += \
+    android.hardware.cas@1.1-service
+
+# Doze
+PRODUCT_PACKAGES += \
+    SamsungDoze
+
 # Touch features
 PRODUCT_PACKAGES += \
     vendor.lineage.touch@1.0-service.samsung
 
-# Camera
+# LiveDisplay
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-impl-legacy \
-    camera.device@1.0-impl-legacy \
-    camera.universal5420
+    vendor.lineage.livedisplay@2.0-service.samsung-exynos
 
-PRODUCT_PACKAGES += \
-    libexynoscamera_shim
+# Camera
+#PRODUCT_PACKAGES += \
+#    android.hardware.camera.provider@2.4-impl-legacy \
+#    camera.device@1.0-impl-legacy \
+#    camera.universal5420 \
+#    libexynoscamera
 
 PRODUCT_PACKAGES += \
     libhwjpeg \
     libion_exynos
 
-# TextClassifier
 PRODUCT_PACKAGES += \
-    textclassifier.bundle1
-
-PRODUCT_PACKAGES += \
-    libxml2 \
-    libprotobuf-cpp-full
-
-# IPv6
-PRODUCT_PACKAGES += \
-    ebtables \
-    ethertypes \
-    libebtc
-
-# Net
-PRODUCT_PACKAGES += \
-    android.system.net.netd@1.0 \
-    libandroid_net \
-    netutils-wrapper-1.0
+    libexynoscamera_shim
 
 # WiFi
 PRODUCT_COPY_FILES += \
@@ -147,7 +148,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
 
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service \
+    android.hardware.wifi@1.0-service.legacy \
     hostapd \
     wificond \
     wpa_supplicant \
@@ -155,7 +156,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libnetcmdiface \
-    wifiloader
+    wifiloader \
+    libxml2
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -163,19 +165,37 @@ PRODUCT_PACKAGES += \
     libbt-vendor
 
 # Audio
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
-    $(LOCAL_PATH)/configs/audio/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \
-    $(LOCAL_PATH)/configs/audio/mixer_paths_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_0.xml
-
 PRODUCT_PACKAGES += \
-    audio.primary.universal5420 \
     android.hardware.audio@2.0-impl \
+    android.hardware.audio@2.0-service \
+    android.hardware.audio@5.0-impl \
+    android.hardware.audio.common@5.0 \
+    android.hardware.audio.common@5.0-util \
     android.hardware.audio.effect@2.0-impl \
+    android.hardware.audio.effect@5.0 \
+    android.hardware.audio.effect@5.0-impl \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
     libtinycompress
+
+PRODUCT_PACKAGES += \
+    audio.primary.universal5420
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/audio/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_0.xml
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
+
+PRODUCT_COPY_FILES += \
+    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
+    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -189,13 +209,6 @@ PRODUCT_COPY_FILES += \
 # Healthd
 PRODUCT_PACKAGES += \
     android.hardware.health@2.0-impl
-
-# HIDL
-PRODUCT_PACKAGES += \
-    android.hidl.base@1.0 \
-    android.hidl.base@1.0_system \
-    android.hidl.manager@1.0 \
-    android.hidl.manager@1.0_system
 
 # GPS
 PRODUCT_COPY_FILES += \
@@ -224,25 +237,18 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/idc/sec_e-pen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/sec_e-pen.idc \
     $(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/Synaptics_HID_TouchPad.idc
 
-# Manifest
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
-
 # IR
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-impl \
-    consumerir.exynos5
+    android.hardware.ir@1.0-service.samsung
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service \
-    power.universal5420 \
+    android.hardware.power@1.0-service.exynos \
+    android.hardware.power.stats@1.0-service.mock
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
-    lights.universal5420 \
+    android.hardware.light@2.0-service.samsung
 
 # MobiCore setup
 PRODUCT_PACKAGES += \
@@ -264,8 +270,8 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl \
-    sensors.universal5420
+    android.hardware.sensors@1.0-impl.samsung8974 \
+    android.hardware.sensors@1.0-service.samsung8974
 
 # Trust HAL
 PRODUCT_PACKAGES += \
@@ -284,10 +290,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=adb \
     ro.adb.secure=0 \
     ro.secure=0
-
-# Root
-PRODUCT_PACKAGES += \
-    su
 
 # Offmode charger
 PRODUCT_PACKAGES += \

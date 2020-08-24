@@ -1,17 +1,17 @@
-import init.universal5420.usb.rc
-import init.universal5420.wifi.rc
-import init.samsung.rc
-import init.target.rc
+import /vendor/etc/init/hw/init.universal5420.usb.rc
+import /vendor/etc/init/hw/init.universal5420.wifi.rc
+import /vendor/etc/init/hw/init.samsung.rc
+import /vendor/etc/init/hw/init.target.rc
 
 on early-init
-    mkdir /efs 0771 radio system
+#    mkdir /efs 0771 radio system
 
     # Set permissions for persist partition
-    mkdir /persist 0771 system system
+#    mkdir /persist 0771 system system
 #    mkdir /mnt/shell/container 0700 system system
 #    mkdir /storage 0550 system sdcard_r
 
-    mkdir /preload 0771 system system
+#    mkdir /preload 0771 system system
 
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
@@ -107,8 +107,6 @@ on property:sys.boot_completed=1
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/target_loads
 
 on post-fs-data
-    setprop vold.post_fs_data_done 1
-
 # Permissions for bluetooth
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
     chown bluetooth ro.bt.bdaddr_path
@@ -400,7 +398,7 @@ on boot
     write /sys/class/sec/tsp/tsp_booster_enabled 0
 
 on fs
-    mount_all /fstab.universal5420
+    mount_all /vendor/etc/fstab.universal5420
     setprop ro.crypto.fuse_sdcard true
 
 # Support Preload install apks
@@ -511,7 +509,7 @@ on property:ro.debug_level=0x4f4c
 #    write /sys/module/fiq_debugger/parameters/kgdb_enable 1
 
 # GPS
-service gpsd /system/bin/gpsd -c /vendor/etc/gps.xml
+service gpsd /vendor/bin/hw/gpsd -c /vendor/etc/gps.xml
     class main
     user gps
     group system inet net_raw wakelock
@@ -545,7 +543,8 @@ on charger
 # LPM
 service charger /charger
     class charger
-    seclabel u:r:healthd:s0
+    critical
+    seclabel u:r:charger:s0
 
 # service for TZPR provisioning version check app
 #service scranton_RD /system/bin/scranton_RD

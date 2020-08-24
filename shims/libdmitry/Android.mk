@@ -29,5 +29,5 @@ LOCAL_SHARED_LIBRARIES := \
 
 LOCAL_SRC_FILES := libdmitry.cpp
 LOCAL_MODULE := libdmitry
-LOCAL_MODULE_TAGS := optional
+LOCAL_VENDOR_MODULE := true
 include $(BUILD_SHARED_LIBRARY)

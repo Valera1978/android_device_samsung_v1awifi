@@ -25,11 +25,11 @@
  * device tree.
  */
 
-static const char* CPU_SYSFS_PATHS[1] = {
+static const std::vector<std::string> cpuSysfsPaths = {
     "/sys/devices/system/cpu/cpu0"
 };
 
-static const char* CPU_INTERACTIVE_PATHS[1] = {
+static const std::vector<std::string> cpuInteractivePaths = {
     "/sys/devices/system/cpu/cpufreq/interactive"
 };
 

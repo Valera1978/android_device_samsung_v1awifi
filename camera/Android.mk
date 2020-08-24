@@ -50,7 +50,6 @@ LOCAL_SRC_FILES:= \
 LOCAL_HEADER_LIBRARIES += \
     libnativebase_headers
 
-LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libexynoscamera
 
 include $(BUILD_SHARED_LIBRARY)
@@ -104,8 +103,5 @@ LOCAL_CFLAGS += -DBACK_ROTATION=0
 endif
 
 LOCAL_MODULE := camera.$(TARGET_BOOTLOADER_BOARD_NAME)
-
-
-LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)

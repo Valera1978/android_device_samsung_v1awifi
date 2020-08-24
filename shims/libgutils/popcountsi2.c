@@ -48,6 +48,10 @@ di_int __aeabi_d2lz(double a)
     return __fixunsdfdi(a);
 }
 
+di_int __aeabi_f2lz(float a) { return (di_int)a; }
+
+du_int __aeabi_f2ulz(float a) { return (du_int)a; }
+
 /* for testing 
 int main()
 {

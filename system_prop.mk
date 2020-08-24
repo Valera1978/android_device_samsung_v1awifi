@@ -56,11 +56,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196609 \
     debug.hwc.skip_dma_types=0,2 \
     debug.hwc.force_gpu=1 \
-    debug.sf.enable_hwc_vds=1
+    debug.sf.enable_hwc_vds=1 \
+    debug.sf.latch_unsignaled=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320 \
     lockscreen.rot_override=true
+
+# Disable more Codec2.0 components
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.stagefright.ccodec=0
 
 # Randomly from stock
 PRODUCT_PROPERTY_OVERRIDES += \

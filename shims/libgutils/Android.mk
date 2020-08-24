@@ -18,8 +18,8 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := popcountsi2.c process_name.c
 LOCAL_SHARED_LIBRARIES := libcutils
 LOCAL_MODULE := libgutils
-LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_VENDOR_MODULE := true
 
 include $(BUILD_SHARED_LIBRARY)
 

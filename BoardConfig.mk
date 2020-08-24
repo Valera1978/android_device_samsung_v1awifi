@@ -17,6 +17,9 @@
 
 LOCAL_PATH := device/samsung/v1awifi
 
+# temporary
+BUILD_BROKEN_DUP_RULES := true
+
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
@@ -40,7 +43,6 @@ TARGET_CPU_VARIANT := cortex-a15
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
-TARGET_CPU_VARIANT := cortex-a15
 
 # Binder
 TARGET_USES_64_BIT_BINDER := true
@@ -59,9 +61,13 @@ BOARD_KERNEL_IMAGE_NAME := zImage
 # Legacy BLOB Support
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 
+# Memory management
+MALLOC_SVELTE := true
+
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10485760
+#BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10485760
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 11059200
 #BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2516582400
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2300000000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 28378660864
@@ -76,6 +82,9 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Vendor separation
 TARGET_COPY_OUT_VENDOR := system/vendor
 
+# Audio
+USE_XML_AUDIO_POLICY_CONF := 1
+
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
@@ -87,9 +96,6 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 TARGET_AUDIOHAL_VARIANT := samsung
 TARGET_POWERHAL_VARIANT := samsung
 BOARD_VENDOR := samsung
-
-# Lineage HW
-JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|$(LOCAL_PATH)/lineagehw|**/*.java
 
 # Samsung Camera
 BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
@@ -106,7 +112,7 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 BOARD_USES_HWC_SERVICES := true
 
 # Exynos display
-BOARD_USES_VIRTUAL_DISPLAY := true
+#BOARD_USES_VIRTUAL_DISPLAY := true
 
 # Samsung OpenMAX Video
 BOARD_USE_STOREMETADATA := true
@@ -139,14 +145,13 @@ TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 TARGET_USES_GRALLOC1 := true
 
 # Wifi
-BOARD_HAVE_SAMSUNG_WIFI := true
+#BOARD_HAVE_SAMSUNG_WIFI := true
 BOARD_WLAN_DEVICE := bcmdhd
 BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 WPA_SUPPLICANT_VERSION := VER_0_8_X
-WIFI_BAND := 802_11_ABG
 WIFI_DRIVER_MODULE_ARG      := "firmware_path=/vendor/etc/wifi/bcmdhd_sta.bin nvram_path=/vendor/etc/wifi/nvram_net.txt"
 WIFI_DRIVER_MODULE_AP_ARG   := "firmware_path=/vendor/etc/wifi/bcmdhd_apsta.bin nvram_path=/vendor/etc/wifi/nvram_net.txt"
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/dhd/parameters/firmware_path"
@@ -173,6 +178,13 @@ IR_HAS_ONE_FREQ_RANGE := true
 # Security patch level - P900XXS0BPL2
 VENDOR_SECURITY_PATCH := 2016-12-01
 
+# HIDL
+DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(LOCAL_PATH)/compatibility_matrix.xml
+
+# Ramdisk
+BOARD_ROOT_EXTRA_FOLDERS := efs
+
 # Recovery
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/ramdisk/fstab.universal5420
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -180,10 +192,10 @@ BOARD_RECOVERY_SWIPE := true
 TARGET_RECOVERY_DENSITY := mdpi
 
 # Shims: mali
-TARGET_LD_SHIM_LIBS += /system/vendor/lib/egl/libGLES_mali.so|libgutils.so
+TARGET_LD_SHIM_LIBS += /vendor/lib/egl/libGLES_mali.so|libgutils.so
 
 # Shims: gps
-TARGET_LD_SHIM_LIBS += /system/bin/gpsd|libdmitry.so
+TARGET_LD_SHIM_LIBS += /vendor/bin/hw/gpsd|libdmitry.so
 
 # Shimes: camera
 TARGET_LD_SHIM_LIBS += /system/lib/libexynoscamera.so|libexynoscamera_shim.so
@@ -192,4 +204,3 @@ SELINUX_IGNORE_NEVERALLOWS := true
 
 # SELinux
 BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
-
