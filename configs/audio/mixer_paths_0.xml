@@ -407,7 +407,87 @@ INPUT_CHANNEL_MAP {
   </path>
 
   <path name="none">
-      <!-- Empty path -->
+     <!-- Empty path -->
+  </path>
+
+  <!-- Samsung OSS audio HAL custom paths -->
+  
+  <!-- Output -->
+  <path name="voice-earpiece-wb">
+    <path name="voice-earpiece"/>
+  </path>
+
+  <path name="voice-speaker-wb">
+    <path name="voice-speaker"/>
+  </path>
+
+  <path name="voice-headphones-wb">
+    <path name="voice-headphones"/>
+  </path>
+
+  <path name="voice-bt-sco-headset">
+    <path name="bt-sco-headset"/>
+  </path>
+
+  <path name="voice-bt-sco-headset-wb">
+    <path name="bt-sco-headset"/>
+  </path>
+
+  <path name="hdmi">
+    <!-- TODO -->
+  </path>
+
+  <path name="speaker-and-hdmi">
+    <!-- TODO -->
+  </path>
+
+  <!-- Input -->
+  <path name="earpiece-mic">
+    <path name="media-main-mic"/>
+  </path>
+
+  <path name="speaker-mic">
+    <path name="media-main-mic"/>
+  </path>
+
+  <path name="headset-mic">
+    <path name="voice-headset-mic"/>
+  </path>
+
+  <path name="voice-mic">
+    <path name="media-main-mic"/>
+  </path>
+
+  <path name="voice-earpiece-mic">
+    <path name="media-main-mic"/>
+  </path>
+
+  <path name="voice-earpiece-mic-wb">
+    <path name="media-main-mic"/>
+  </path>
+
+  <path name="voice-speaker-mic">
+    <path name="media-main-mic"/>
+  </path>
+
+  <path name="voice-speaker-mic-wb">
+    <path name="media-main-mic"/>
+  </path>
+
+  <path name="voice-headset-mic-wb">
+    <path name="voice-headset-mic"/>
+  </path>
+
+  <path name="voice-bt-sco-mic">
+    <path name="bt-sco-mic"/>
+  </path>
+
+  <path name="voice-bt-sco-mic-wb">
+    <path name="bt-sco-mic"/>
+  </path>
+
+  <path name="voice-rec-mic">
+    <path name="voice-rec-main-mic"/>
   </path>
 
 </mixer>
