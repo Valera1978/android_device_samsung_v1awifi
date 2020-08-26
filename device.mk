@@ -45,6 +45,7 @@ PRODUCT_PACKAGES += \
     init.universal5420.wifi.rc \
     fstab.universal5420 \
     init.target.rc \
+    init.power.rc \
     ueventd.universal5420.rc
 
 # first_stage_mount
@@ -132,8 +133,7 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
 #    android.hardware.camera.provider@2.4-impl-legacy \
 #    camera.device@1.0-impl-legacy \
-#    camera.universal5420 \
-#    libexynoscamera
+#    camera.universal5420
 
 PRODUCT_PACKAGES += \
     libhwjpeg \
