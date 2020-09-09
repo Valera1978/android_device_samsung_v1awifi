@@ -50,8 +50,8 @@ PRODUCT_PACKAGES += \
 
 # first_stage_mount
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/ramdisk/fstab_fst.universal5420:$(TARGET_COPY_OUT_RAMDISK)/fstab.universal5420 \
-    $(LOCAL_PATH)/ramdisk/fstab_fst.universal5420:$(TARGET_COPY_OUT_VENDOR)/fstab.universal5420
+    $(LOCAL_PATH)/ramdisk/fstab_fst.universal5420:$(TARGET_COPY_OUT_ROOT)/fstab.universal5420 \
+    $(LOCAL_PATH)/ramdisk/fstab_fst.universal5420:$(TARGET_COPY_OUT_RAMDISK)/fstab.universal5420
 
 # Permissions
 PRODUCT_COPY_FILES += \
